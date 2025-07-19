@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Chatbot</title>
+</head>
+<body>
+  <h1>مرحبا! اسأل أي سؤال 👇</h1>
+  <input id="question" placeholder="سؤالك هنا" />
+  <button onclick="ask()">أرسل</button>
+  <p id="answer"></p>
+
+  <script>
+    async function ask() {
+      const question = document.getElementById("question").value;
+      const response = await fetch("https://YOUR-BACKEND-URL/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question })
+      });
+      const data = await response.json();
+      document.getElementById("answer").innerText = data.answer;
+    }
+  </script>
+</body>
+</html>
